@@ -30,3 +30,15 @@ nPr n r
   | n < r = error "n should be greater than or equal to r."
   | n == r = factorial n
   | otherwise = product [n, (n - 1) .. (n - r + 1)]
+
+
+-- Combination
+nCr :: Integral a => a -> a -> a
+
+nCr n 0 = 1
+
+nCr n r
+  | n < 0 || r < 0 = error "n or r should not have a negative value."
+  | n < r = error "n should be greater than or equal to r."
+  | n == r = 1
+  | otherwise = (nPr n r) `div` (factorial r)
