@@ -37,3 +37,28 @@ gcd' 0 (-1)
 abs $ 4 - 7
 
 1 <= 2
+
+factorial 0
+factorial 3
+factorial 4
+factorial 5
+
+--nPr 2 3
+nPr 0 0
+--nPr (-1) 1
+nPr 3 3
+nPr 3 2
+nPr 3 1
+nPr 3 0
+
+nPr 2 2
+nPr 2 1
+nPr 2 0
+
+nPr 1 1
+nPr 1 0
+
+nPr 5 3
+
+[5,4..1]
+[1..3]
