@@ -13,3 +13,9 @@ fibo' 2 = 1
 fibo' n = head $ foldl f [1,1] [1..(n - 2)]
   where
     f (a:b:fs) _ = (a + b):(a:b:[])
+
+-- by using corecursion
+fibo'' :: Int -> Int
+fibo'' n = head . drop (n - 1) $ fibs
+  where
+    fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
