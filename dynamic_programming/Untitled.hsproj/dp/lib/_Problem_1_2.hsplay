@@ -1,0 +1,8 @@
+-- Haskell Playground 1.0
+accSum [1..6]
+
+snd (1, 2)
+
+accSum' [1..6]
+
+accSum'' [1..6]
