@@ -1,5 +1,7 @@
 module Code_2_4 () where
 
+import Control.Monad.State
+
 -- by using top-down recursion
 fibo :: Int -> Int
 fibo 1 = 1
@@ -19,3 +21,20 @@ fibo'' :: Int -> Int
 fibo'' n = head . drop (n - 1) $ fibs
   where
     fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
+
+-- by using State Monad
+type LastTwo = (Int, Int)
+
+nextFibo :: State LastTwo Int
+nextFibo = state $ \(a, b) -> (a + b, (b, a + b))
+
+buildFiboState :: Int -> State LastTwo [Int]
+buildFiboState n = sequence $ replicate n nextFibo
+
+fibo''' :: Int -> Int
+fibo''' 1 = 1
+fibo''' 2 = 1
+fibo''' n = let (_, (_, nthFibo)) = runFibo in nthFibo
+  where
+    m = n - 2
+    runFibo = runState (buildFiboState m) (1, 1)
