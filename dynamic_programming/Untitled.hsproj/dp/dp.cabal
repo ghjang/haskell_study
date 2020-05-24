@@ -10,9 +10,10 @@ x-last-ide-version: HfM1.7.0
 library
     hs-source-dirs: lib
     other-modules:
-        Problem_1_1
-        Problem_1_3
         Problem_1_2
+        Problem_1_3
+        Problem_1_1
+        Code_1_10
     default-language: Haskell2010
     build-depends:
         base -any

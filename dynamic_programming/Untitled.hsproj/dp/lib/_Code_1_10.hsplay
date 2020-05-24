@@ -1,0 +1,7 @@
+-- Haskell Playground 1.0
+extractFstMaxVal [9,6,2,12,11,9,3,7]
+
+bubbleSort []
+bubbleSort [9,6,2,12,11,9,3,7]
+bubbleSort [10]
+bubbleSort [9,6]
