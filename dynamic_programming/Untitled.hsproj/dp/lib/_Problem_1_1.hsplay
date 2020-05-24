@@ -1,0 +1,11 @@
+-- Haskell Playground 1.0
+fact 3
+fact 4
+
+product [1..3]
+
+fact' 4
+fact' 5
+
+fact'' 4
+fact'' 5
