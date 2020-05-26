@@ -1,0 +1,6 @@
+-- Haskell Playground 1.0
+rotateLeft 1 [1..5]
+rotateLeft 1 []
+
+zipper = createSwapListZipper [1..5]
+nextSwap . nextSwap .nextSwap .nextSwap $ zipper
