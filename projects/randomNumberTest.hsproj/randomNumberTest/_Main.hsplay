@@ -1,0 +1,11 @@
+-- Haskell Playground 1.0
+import System.Time
+
+cycle [1]
+
+take 5 $ (randomValues 13) :: [Int]
+take 5 $ (randomValues 13) :: [Int]
+take 5 $ (randomValues 12) :: [Bool]
+
+now <- getClockTime
+toUTCTime now
