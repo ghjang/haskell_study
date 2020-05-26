@@ -1,0 +1,44 @@
+-- Haskell Playground 1.0
+indices 9 9
+
+
+
+
+
+
+
+
+
+take 10 fibs
+
+indices 9 9
+10 `div` 2
+7 `div` 2
+
+padding 1 1 '_'
+padding 2 1 '_'
+padding 3 3 '_'
+
+pad1 = padding 2 (3 `div` 2 + 1) '_'
+pad2 = padding 2 1 '_'
+pad1
+pad2
+
+fstTri = ["_1_",
+          "111"]
+fstTri
+
+zipWith3 (\a b c -> a ++ b ++ c) pad1 fstTri pad1
+
+head sierpinskiTriangles
+head . drop 1 $ sierpinskiTriangles
+head . drop 2 $ sierpinskiTriangles
+
+--print "abc"
+{-
+mapM_ putStrLn $ head sierpinskiTriangles
+mapM_ putStrLn $ head .drop 1 $ sierpinskiTriangles
+mapM_ putStrLn $ head .drop 2 $ sierpinskiTriangles
+-}
+
+mapM_ (mapM_ putStrLn) $ take 4 sierpinskiTriangles
