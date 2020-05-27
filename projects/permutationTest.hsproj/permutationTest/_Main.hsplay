@@ -34,3 +34,6 @@ perms [1..5]
 
 --perms [1,2]
 --perms [1,2,3]
+
+mapM_ print $ permutations [1..4]
+mapM_ print $ perms [1..4]
