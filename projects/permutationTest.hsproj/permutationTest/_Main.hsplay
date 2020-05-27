@@ -1,6 +1,36 @@
 -- Haskell Playground 1.0
+import Data.List
+
 rotateLeft 1 [1..5]
 rotateLeft 1 []
 
 zipper = createSwapListZipper [1..5]
 nextSwap . nextSwap .nextSwap .nextSwap $ zipper
+
+headElemSwapList []
+headElemSwapList [1]
+headElemSwapList [1,2]
+headElemSwapList [1..5]
+
+tails [1..5]
+init $ tails [1..5]
+
+init [1..5]
+inits [1..5]
+
+--repeat 5
+
+--perms []
+
+headElemSwapList [1]
+tail [1]
+
+perms []
+perms [1]
+perms [1,2]
+perms [1,2,3]
+perms [1,2,3,4]
+perms [1..5]
+
+--perms [1,2]
+--perms [1,2,3]
