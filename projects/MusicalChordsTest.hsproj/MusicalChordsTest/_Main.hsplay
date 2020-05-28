@@ -1,0 +1,12 @@
+-- Haskell Playground 1.0
+map pitchToStr twelvePitchesF
+
+map pitchToNum twelvePitchesF
+
+pitchToNum . head $ drop 2 twelvePitchesF
+
+pitchToNum $ Pitch (C, Natural)
+pitchToNum $ Pitch (F, Natural)
+pitchToNum $ Pitch (G, Flat)
+
+numToPitchF 7
