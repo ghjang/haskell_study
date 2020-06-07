@@ -13,10 +13,10 @@ module SimplePitch
 , numToPitchF
 , numToPitchS
 , enharmonicPitch
-, enharmonicPitchM
 ) where 
 
 import Data.List
+import Utility
 
 data BasePitchName = C | D | E | F | G | A | B
       deriving (Eq, Enum, Bounded, Show)
@@ -67,10 +67,10 @@ twelvePitchS = (concat $ (zipWith f pitches (repeat Sharp)))
     pitches = [(minBound :: BasePitchName)..(maxBound :: BasePitchName)]
     f = \p s -> [Pitch Natural p, Pitch s p]
 
-pitchToNum :: Pitch -> Maybe Int
-pitchToNum (Pitch Natural p) = elemIndex (Pitch Natural p) twelvePitchF
-pitchToNum (Pitch Flat p) = elemIndex (Pitch Flat p) twelvePitchF 
-pitchToNum (Pitch Sharp p) = elemIndex (Pitch Sharp p) twelvePitchS
+pitchToNum :: Pitch -> Int
+pitchToNum (Pitch Natural p) = getMaybe $ elemIndex (Pitch Natural p) twelvePitchF
+pitchToNum (Pitch Flat p) = getMaybe $ elemIndex (Pitch Flat p) twelvePitchF 
+pitchToNum (Pitch Sharp p) = getMaybe $ elemIndex (Pitch Sharp p) twelvePitchS
 
 numToPitchF :: Int -> Maybe Pitch
 numToPitchF n
@@ -82,19 +82,11 @@ numToPitchS n
   | n >= 0 && n <= 11 = Just . head $ drop n twelvePitchS
   | otherwise = Nothing
 
-enharmonicPitch :: Accidental -> Pitch -> Maybe Pitch
-enharmonicPitch Flat (Pitch Sharp E) = Just (Pitch Natural F)
-enharmonicPitch Flat (Pitch Sharp B) = Just (Pitch Natural C)
-enharmonicPitch Sharp (Pitch Flat C) = Just (Pitch Natural B)
-enharmonicPitch Sharp (Pitch Flat F) = Just (Pitch Natural E)
-enharmonicPitch Flat (Pitch Sharp name) = do
-  n <- pitchToNum (Pitch Sharp name)
-  numToPitchF n
-enharmonicPitch Sharp (Pitch Flat name) = do
-  n <- pitchToNum (Pitch Flat name)
-  numToPitchS n
-enharmonicPitch _ p = Just p
-
-enharmonicPitchM :: Accidental -> Maybe Pitch -> Maybe Pitch
-enharmonicPitchM acc (Just p) = enharmonicPitch acc p
-enharmonicPitchM _ Nothing = Nothing
+enharmonicPitch :: Accidental -> Pitch -> Pitch
+enharmonicPitch Flat (Pitch Sharp E) = Pitch Natural F
+enharmonicPitch Flat (Pitch Sharp B) = Pitch Natural C
+enharmonicPitch Sharp (Pitch Flat C) = Pitch Natural B
+enharmonicPitch Sharp (Pitch Flat F) = Pitch Natural E
+enharmonicPitch Flat (Pitch Sharp name) = getMaybe . numToPitchF . pitchToNum $ (Pitch Sharp name)  
+enharmonicPitch Sharp (Pitch Flat name) = getMaybe . numToPitchS . pitchToNum $ (Pitch Flat name) 
+enharmonicPitch _ p = p

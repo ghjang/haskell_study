@@ -7,6 +7,7 @@ module SimpleInterval
 ) where
 
 import SimplePitch
+import Utility
 
 data Interval = Perfect1st
               | Minor2nd
@@ -39,16 +40,22 @@ numToInterval n = foldl f Nothing intervalList
     f Nothing e = if fst e == n then Just (snd e) else Nothing
     intervalList = zipWith (\x y -> (x, y)) [0..] [Perfect1st .. Perfect8th]
 
-above :: Interval -> Pitch -> Maybe Pitch
-i `above` (Pitch acc name) = do
-  pn <- pitchToNum (Pitch acc name)
-  let f = case acc of Natural -> numToPitchS
-                      Flat -> numToPitchF
-                      Sharp -> numToPitchS
-  f $ (intervalToNum i + pn) `mod` 12
+aboveM :: Interval -> Pitch -> Maybe Pitch
+i `aboveM` (Pitch acc name) = f $ (intervalToNum i + pn) `mod` 12
+  where
+    pn = pitchToNum (Pitch acc name)
+    f = case acc of Natural -> numToPitchS
+                    Flat -> numToPitchF
+                    Sharp -> numToPitchS
 
-below :: Interval -> Pitch -> Maybe Pitch
-i `below` p = do
+belowM :: Interval -> Pitch -> Maybe Pitch
+i `belowM` p = do
   let n = 12 - intervalToNum i
   i' <- numToInterval n
-  i' `above` p
+  i' `aboveM` p
+
+above :: Interval -> Pitch -> Pitch
+i `above` (Pitch acc name) = getMaybe $ i `aboveM` (Pitch acc name)
+
+below :: Interval -> Pitch -> Pitch
+i `below` (Pitch acc name) = getMaybe $ i `belowM` (Pitch acc name)

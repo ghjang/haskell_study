@@ -11,33 +11,28 @@ import SimpleInterval
 
 type TriadChord = (Pitch, Pitch, Pitch)
 
-getTriad :: [Maybe Pitch] -> TriadChord
-getTriad [Just root, Just third, Just fifth] = (root, third, fifth)
-
 majorTriad :: Pitch -> TriadChord
-majorTriad root = getTriad $ f root
+majorTriad = getTriad . (sequenceA [id, (Major3rd `above`), (Perfect5th `above`)])
   where
-    f = sequenceA [\_ -> Just root,
-                   (Major3rd `above`),
-                   (Perfect5th `above`)]
-
+    getTriad [root, third, fifth] = (root, third, fifth)
+    
 minorTriad :: Pitch -> TriadChord
-minorTriad root = getTriad $ f root
+minorTriad = flat' . majorTriad
   where
-    f = sequenceA [\_ -> Just root,
-                   (enharmonicPitchM Flat) . (Minor3rd `above`),
-                   (Perfect5th `above`)]
+    flat' (root, third, fifth) = ( root
+                                 , (enharmonicPitch Flat) . (Minor2nd `below`) $ third
+                                 , fifth )
 
 diminishedTriad :: Pitch -> TriadChord
-diminishedTriad root = getTriad $ f root
+diminishedTriad = flat' . majorTriad
   where
-    f = sequenceA [\_ -> Just root,
-                   (enharmonicPitchM Flat) . (Minor3rd `above`),
-                   (enharmonicPitchM Flat) . (Augmented4th `above`)]
+    flat' (root, third, fifth) = ( root
+                                 , (enharmonicPitch Flat) . (Minor2nd `below`) $ third
+                                 , (enharmonicPitch Flat) . (Minor2nd `below`) $ fifth )
 
 augmentedTriad :: Pitch -> TriadChord
-augmentedTriad root = getTriad $ f root
+augmentedTriad = sharp' . majorTriad
   where
-    f = sequenceA [\_ -> Just root,
-                   (Major3rd `above`),
-                   (enharmonicPitchM Sharp) . (Minor6th `above`)]
+    sharp' (root, third, fifth) = ( root
+                                  , third
+                                  , (enharmonicPitch Sharp) . (Minor2nd `above`) $ fifth )
