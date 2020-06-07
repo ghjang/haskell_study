@@ -1,0 +1,26 @@
+-- Haskell Playground 1.0
+[Perfect1st .. Perfect8th]
+
+--elemIndex Perfect5th [Perfect1st .. Perfect8th]
+
+negate 1
+
+intervalToNum Perfect1st
+intervalToNum Perfect8th
+
+map intervalToNum [Perfect1st .. Perfect8th]
+
+Perfect5th `above` Pitch Natural C
+Augmented4th `above` Pitch Natural C
+Perfect5th `above` Pitch Flat E
+Perfect5th `below` Pitch Flat E
+
+Perfect5th `above` Pitch Natural E
+Perfect5th `below` Pitch Natural E
+
+(Perfect5th `above`) (Pitch Flat E)
+(`above` Pitch Flat E) Perfect5th
+
+Minor3rd `below` Pitch Flat D
+Major6th `above` natural A
+Minor6th `above` natural A

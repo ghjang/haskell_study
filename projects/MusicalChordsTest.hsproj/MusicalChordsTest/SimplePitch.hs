@@ -10,6 +10,7 @@ module SimplePitch
 , pitchToNum
 , numToPitchF
 , numToPitchS
+, enharmonicPitch
 ) where 
 
 import Data.List
@@ -69,3 +70,16 @@ numToPitchS :: Int -> Maybe Pitch
 numToPitchS n
   | n >= 0 && n <= 11 = Just . head $ drop n twelvePitchS
   | otherwise = Nothing
+
+enharmonicPitch :: Accidental -> Pitch -> Maybe Pitch
+enharmonicPitch Flat (Pitch Sharp E) = Just (Pitch Natural F)
+enharmonicPitch Flat (Pitch Sharp B) = Just (Pitch Natural C)
+enharmonicPitch Sharp (Pitch Flat C) = Just (Pitch Natural B)
+enharmonicPitch Sharp (Pitch Flat F) = Just (Pitch Natural E)
+enharmonicPitch Flat (Pitch Sharp name) = do
+  n <- pitchToNum (Pitch Sharp name)
+  numToPitchF n
+enharmonicPitch Sharp (Pitch Flat name) = do
+  n <- pitchToNum (Pitch Flat name)
+  numToPitchS n
+enharmonicPitch _ p = Just p

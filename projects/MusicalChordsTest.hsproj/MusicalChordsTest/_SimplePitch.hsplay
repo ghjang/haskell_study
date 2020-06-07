@@ -20,3 +20,11 @@ pitchToNum $ Pitch Flat G
 
 numToPitchS 7
 numToPitchF 7
+
+-- It's buggy!
+enharmonicPitch Flat (Pitch Natural C)
+enharmonicPitch Flat (Pitch Flat C)
+enharmonicPitch Flat (Pitch Sharp C)
+enharmonicPitch Sharp (Pitch Flat C)
+enharmonicPitch Sharp (Pitch Flat E)
+
