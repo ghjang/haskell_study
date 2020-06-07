@@ -5,12 +5,15 @@ module SimplePitch
 , natural
 , flat
 , sharp
+, hasFlat
+, hasSharp
 , twelvePitchF
 , twelvePitchS
 , pitchToNum
 , numToPitchF
 , numToPitchS
 , enharmonicPitch
+, enharmonicPitchM
 ) where 
 
 import Data.List
@@ -39,6 +42,14 @@ flat = Pitch Flat
 
 sharp :: BasePitchName -> Pitch
 sharp = Pitch Sharp
+
+hasFlat :: Pitch -> Bool
+hasFlat (Pitch Flat _) = True
+hasFlat _ = False
+
+hasSharp :: Pitch -> Bool
+hasSharp (Pitch Sharp _) = True
+hasSharp _ = False
 
 twelvePitchNum = [0..11]
 
@@ -83,3 +94,7 @@ enharmonicPitch Sharp (Pitch Flat name) = do
   n <- pitchToNum (Pitch Flat name)
   numToPitchS n
 enharmonicPitch _ p = Just p
+
+enharmonicPitchM :: Accidental -> Maybe Pitch -> Maybe Pitch
+enharmonicPitchM acc (Just p) = enharmonicPitch acc p
+enharmonicPitchM _ Nothing = Nothing

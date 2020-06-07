@@ -1,0 +1,27 @@
+-- Haskell Playground 1.0
+sequenceA [(Perfect1st `above`), (Major3rd `above`), (Perfect5th `above`)] (natural C)
+sequenceA [(Perfect1st `above`), (Major3rd `above`), (Perfect5th `above`)] (flat E)
+
+majorTriad (natural C)
+majorTriad (flat E)
+
+minorTriad (natural C)
+minorTriad (flat E)
+
+diminishedTriad (natural C)
+diminishedTriad (natural F)
+
+augmentedTriad (natural C)
+augmentedTriad (natural F)
+
+map majorTriad twelvePitchF
+map majorTriad twelvePitchS
+
+map minorTriad twelvePitchF
+map minorTriad twelvePitchS
+
+map diminishedTriad twelvePitchF
+map diminishedTriad twelvePitchS
+
+map augmentedTriad twelvePitchF
+map augmented twelvePitchS

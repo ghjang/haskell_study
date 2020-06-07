@@ -1,6 +1,9 @@
 module SimpleInterval
 ( Interval (..)
 , intervalToNum
+, numToInterval
+, above
+, below
 ) where
 
 import SimplePitch
