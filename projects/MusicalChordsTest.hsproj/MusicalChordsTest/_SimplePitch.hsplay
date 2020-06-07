@@ -1,0 +1,22 @@
+-- Haskell Playground 1.0
+natural G
+flat G
+sharp G
+
+flat C
+sharp B
+
+map show twelvePitchF
+map show twelvePitchS
+
+map pitchToNum twelvePitchF
+map pitchToNum twelvePitchS
+
+pitchToNum . head $ drop 2 twelvePitchF
+
+pitchToNum $ Pitch Natural C
+pitchToNum $ Pitch Natural F
+pitchToNum $ Pitch Flat G
+
+numToPitchS 7
+numToPitchF 7
