@@ -1,1 +1,14 @@
 -- Haskell Playground 1.0
+import Control.Applicative
+
+map (scale Major) twelvePitchF
+
+map (map majorTriad) $ map (scale Major) twelvePitchF
+
+
+getZipList $ ZipList [majorTriad, minorTriad, minorTriad, majorTriad, majorTriad, minorTriad, diminishedTriad]
+              <*> ZipList (scale Major (natural C))
+
+map majorScaleDiatonicTriad $ map (scale Major) twelvePitchF
+
+main
