@@ -1,0 +1,14 @@
+-- Haskell Playground 1.0
+{-# LANGUAGE DeriveAnyClass #-}
+
+data Test = A | B | C deriving (Eq, Bounded, Enum, Indexable, Show)
+
+indexOf A
+indexOf B
+indexOf C
+
+(fromIndex 10) :: Maybe Test
+
+(fromIndex 0) :: Maybe Test
+(fromIndex 1) :: Maybe Test
+(fromIndex 2) :: Maybe Test
