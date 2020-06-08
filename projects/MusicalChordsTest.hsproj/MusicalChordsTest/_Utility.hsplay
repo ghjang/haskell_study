@@ -1,0 +1,4 @@
+-- Haskell Playground 1.0
+getMaybe $ Just 10
+
+rotateLeft 5 [1..10]
