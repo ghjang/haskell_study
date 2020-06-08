@@ -1,7 +1,7 @@
+{-# LANGUAGE DeriveAnyClass #-}
+
 module SimpleInterval
 ( Interval (..)
-, intervalToNum
-, numToInterval
 , above
 , below
 , diminishInterval
@@ -9,6 +9,7 @@ module SimpleInterval
 
 import SimplePitch
 import Utility
+import Indexable
 
 data Interval = Perfect1st
               | Minor2nd
@@ -23,22 +24,10 @@ data Interval = Perfect1st
               | Minor7th
               | Major7th
               | Perfect8th
-      deriving (Eq, Bounded, Enum, Show)
-
-intervalToNum :: Interval -> Int
-intervalToNum interval = fst . head $ dropWhile (\x -> snd x /= interval) l
-  where
-    l = zipWith (\x y -> (x, y)) [0..] [Perfect1st .. Perfect8th]
-
-numToInterval :: Int -> Maybe Interval
-numToInterval n = foldl f Nothing l
-  where
-    f (Just interval) _ = Just interval
-    f Nothing e = if fst e == n then Just (snd e) else Nothing
-    l = zipWith (\x y -> (x, y)) [0..] [Perfect1st .. Perfect8th]
+      deriving (Eq, Bounded, Enum, Show, Indexable)
 
 aboveM :: Interval -> Pitch -> Maybe Pitch
-i `aboveM` (Pitch acc name) = f $ (intervalToNum i + pn) `mod` 12
+i `aboveM` (Pitch acc name) = f $ (indexOf i + pn) `mod` 12
   where
     pn = pitchToNum (Pitch acc name)
     f = case acc of Natural -> numToPitchS
@@ -47,8 +36,8 @@ i `aboveM` (Pitch acc name) = f $ (intervalToNum i + pn) `mod` 12
 
 belowM :: Interval -> Pitch -> Maybe Pitch
 i `belowM` p = do
-  let n = 12 - intervalToNum i
-  i' <- numToInterval n
+  let n = 12 - indexOf i
+  i' <- fromIndex n
   i' `aboveM` p
 
 above :: Interval -> Pitch -> Pitch
@@ -58,4 +47,4 @@ below :: Interval -> Pitch -> Pitch
 i `below` (Pitch acc name) = getMaybe $ i `belowM` (Pitch acc name)
 
 diminishInterval :: Int -> Interval -> Interval
-diminishInterval n i = getMaybe . numToInterval $ max (intervalToNum i - n) 0
+diminishInterval n i = getMaybe . fromIndex $ max (indexOf i - n) 0

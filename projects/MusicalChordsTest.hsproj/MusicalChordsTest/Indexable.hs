@@ -1,7 +1,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
 module Indexable
-( Indexable
+( Indexable (..)
 ) where
 
 import Data.List

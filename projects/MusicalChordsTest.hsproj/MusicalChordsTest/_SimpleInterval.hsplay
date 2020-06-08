@@ -7,11 +7,6 @@ negate 1
 
 dropWhile (\x -> x /= 10) [1..20]
 
-intervalToNum Perfect1st
-intervalToNum Perfect8th
-
-map intervalToNum [Perfect1st .. Perfect8th]
-
 Perfect5th `above` Pitch Natural C
 Augmented4th `above` Pitch Natural C
 Perfect5th `above` Pitch Flat E
