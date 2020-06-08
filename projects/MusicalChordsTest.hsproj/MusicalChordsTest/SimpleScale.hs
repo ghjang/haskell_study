@@ -4,12 +4,14 @@ module SimpleScale
 ( BasicScale (..)
 , SevenMode (..)
 , scale
+, mode
 ) where
 
 import Data.List
 import SimplePitch
 import SimpleInterval
 import Indexable
+import Utility
 
 data BasicScale = Major | NaturalMinor | HarmonicMinor | MelodicMinor
       deriving (Eq, Bounded, Enum, Show)
@@ -37,3 +39,10 @@ scaleInterval s = flatScaleInterval xs majorScaleInterval
 
 scale :: BasicScale -> Pitch -> [Pitch]
 scale s p = (sequenceA $ map above $ scaleInterval s) p
+
+mode :: SevenMode -> Pitch -> [Pitch]
+mode m p = (sequenceA $ map (\x -> (enharmonicPitch Flat) . (x `above`)) $ modeInterval) p'
+  where
+    modeIndex = indexOf m
+    modeInterval = rotateLeft modeIndex majorScaleInterval
+    p' = (majorScaleInterval !! modeIndex) `below` p

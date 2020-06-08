@@ -1,4 +1,6 @@
 -- Haskell Playground 1.0
+import Control.Applicative
+
 scaleIntervalToNum majorScaleInterval
 
 scale Major (natural A)
@@ -8,3 +10,14 @@ scale MelodicMinor (natural A)
 
 (sequenceA $ map scale [Major .. MelodicMinor]) (natural A)
 
+(sequenceA $ map mode [Ionian .. Locrian]) (natural C)
+
+print $ mode Mixolydian (natural C)
+print $ mode Aeolian (natural C)
+
+mapM_ (\(x, y) -> putStrLn $ (show . head) y ++ " " ++ (show x) ++ ": " ++ show y)
+      $ zip [Ionian .. Locrian] ((sequenceA $ map mode [Ionian .. Locrian]) (natural C))
+
+mapM_ putStrLn $ zipWith (\x y -> show x ++ " " ++ show y ++ ": " ++ (show $ mode y x))
+                         (scale Major (natural C))
+                         [Ionian .. Locrian]
