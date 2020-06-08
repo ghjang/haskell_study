@@ -25,20 +25,16 @@ data Interval = Perfect1st
       deriving (Eq, Bounded, Enum, Show)
 
 intervalToNum :: Interval -> Int
-intervalToNum interval = snd $ foldl f 
-                                     (False, 0)
-                                     [Perfect1st .. Perfect8th]
+intervalToNum interval = fst . head $ dropWhile (\x -> snd x /= interval) l
   where
-    f (True, index) _ = (True, index)
-    f (False, index) e = if interval == e then (True, index)
-                                          else (False, index + 1)
+    l = zipWith (\x y -> (x, y)) [0..] [Perfect1st .. Perfect8th]
 
 numToInterval :: Int -> Maybe Interval
-numToInterval n = foldl f Nothing intervalList
+numToInterval n = foldl f Nothing l
   where
     f (Just interval) _ = Just interval
     f Nothing e = if fst e == n then Just (snd e) else Nothing
-    intervalList = zipWith (\x y -> (x, y)) [0..] [Perfect1st .. Perfect8th]
+    l = zipWith (\x y -> (x, y)) [0..] [Perfect1st .. Perfect8th]
 
 aboveM :: Interval -> Pitch -> Maybe Pitch
 i `aboveM` (Pitch acc name) = f $ (intervalToNum i + pn) `mod` 12

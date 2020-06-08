@@ -5,6 +5,8 @@
 
 negate 1
 
+dropWhile (\x -> x /= 10) [1..20]
+
 intervalToNum Perfect1st
 intervalToNum Perfect8th
 

@@ -12,6 +12,7 @@ module SimplePitch
 , pitchToNum
 , numToPitchF
 , numToPitchS
+, numToPitch
 , enharmonicPitch
 ) where 
 
@@ -81,6 +82,9 @@ numToPitchS :: Int -> Maybe Pitch
 numToPitchS n
   | n >= 0 && n <= 11 = Just . head $ drop n twelvePitchS
   | otherwise = Nothing
+
+numToPitch :: Int -> Maybe Pitch
+numToPitch = numToPitchS
 
 enharmonicPitch :: Accidental -> Pitch -> Pitch
 enharmonicPitch Flat (Pitch Sharp E) = Pitch Natural F
