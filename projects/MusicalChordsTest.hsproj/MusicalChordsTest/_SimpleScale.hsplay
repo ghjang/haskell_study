@@ -1,0 +1,9 @@
+-- Haskell Playground 1.0
+scaleIntervalToNum majorScaleInterval
+
+scale Major (natural A)
+scale NaturalMinor (natural A)
+scale HarmonicMinor (natural A)
+scale MelodicMinor (natural A)
+
+(sequenceA $ map scale [Major .. MelodicMinor]) (natural A)

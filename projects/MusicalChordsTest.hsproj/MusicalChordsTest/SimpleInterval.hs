@@ -4,6 +4,7 @@ module SimpleInterval
 , numToInterval
 , above
 , below
+, diminishInterval
 ) where
 
 import SimplePitch
@@ -55,3 +56,6 @@ i `above` (Pitch acc name) = getMaybe $ i `aboveM` (Pitch acc name)
 
 below :: Interval -> Pitch -> Pitch
 i `below` (Pitch acc name) = getMaybe $ i `belowM` (Pitch acc name)
+
+diminishInterval :: Int -> Interval -> Interval
+diminishInterval n i = getMaybe . numToInterval $ max (intervalToNum i - n) 0

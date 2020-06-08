@@ -26,3 +26,5 @@ Perfect5th `below` Pitch Natural E
 Minor3rd `below` Pitch Flat D
 Major6th `above` natural A
 Minor6th `above` natural A
+
+diminishInterval 1 Major3rd
