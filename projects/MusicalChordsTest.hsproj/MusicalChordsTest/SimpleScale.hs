@@ -1,7 +1,6 @@
 module SimpleScale
 ( BasicScale (..)
 , SevenMode (..)
-, scaleIntervalToNum
 , scale
 ) where
 
@@ -19,13 +18,13 @@ majorScaleInterval = [Perfect1st, Major2nd, Major3rd, Perfect4th, Perfect5th, Ma
 scaleIntervalToNum :: [Interval] -> [Int]
 scaleIntervalToNum = map intervalToNum
 
-flatScale :: [Int] -> [Interval] -> [Interval]
-flatScale xs is = map f $ zipWith (\x y -> (x, y)) [1..] is
+flatScaleInterval :: [Int] -> [Interval] -> [Interval]
+flatScaleInterval xs is = map f $ zipWith (\x y -> (x, y)) [1..] is
   where
     f (x, y) = if x `elem` xs then diminishInterval 1 y else y
 
 scaleInterval :: BasicScale -> [Interval]
-scaleInterval s = flatScale xs majorScaleInterval
+scaleInterval s = flatScaleInterval xs majorScaleInterval
   where
     xs = case s of Major -> []
                    NaturalMinor -> [3, 6, 7]

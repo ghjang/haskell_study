@@ -7,3 +7,4 @@ scale HarmonicMinor (natural A)
 scale MelodicMinor (natural A)
 
 (sequenceA $ map scale [Major .. MelodicMinor]) (natural A)
+
