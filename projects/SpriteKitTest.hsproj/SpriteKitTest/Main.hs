@@ -23,20 +23,39 @@ boundingRect' n@Sprite{..} = (leftTop, rightTop, rightBottom, leftBottom)
     leftTop = rectOrigin br
     rightTop = Point ((pointX $ rectOrigin br) + (sizeWidth $ rectSize br))
                      (pointY $ rectOrigin br )
-    rightBottom = Point ((pointX $ rectOrigin br) + (sizeWidth $ rectSize br))
+    rightBottom = Point (pointX rightTop)
                         ((pointY $ rectOrigin br) - (sizeHeight $ rectSize br))
     leftBottom = Point (pointX $ rectOrigin br)
-                       ((pointY $ rectOrigin br) - (sizeHeight $ rectSize br))
+                       (pointY rightBottom)
 
-addBorder :: Color -> GFloat -> Node u -> Node u
-addBorder color width n@Sprite{..} = node [ n, borderShape ]
+borderShape :: Color -> GFloat -> Node u -> Node u
+borderShape color width n@Sprite{..} = (shapeNodeWithPath
+                                          [ MoveToPoint leftTop
+                                          , AddLineToPoint rightTop
+                                          , AddLineToPoint rightBottom
+                                          , AddLineToPoint leftBottom
+                                          , CloseSubpath ])
+                                          { shapeStrokeColor = color
+                                          , shapeLineWidth = width }
   where
-    borderShape = (shapeNodeWithPath
-                    [ MoveToPoint leftTop
-                    , AddLineToPoint rightTop
-                    , AddLineToPoint rightBottom
-                    , AddLineToPoint leftBottom
-                    , CloseSubpath ])
-                    { shapeStrokeColor = color
-                    , shapeLineWidth = width }
     (leftTop, rightTop, rightBottom, leftBottom) = boundingRect' n
+
+axisShape :: Color -> GFloat -> Node u -> Node u
+axisShape color width n@Sprite{..} = (shapeNodeWithPath
+                                       [ MoveToPoint centerTop
+                                       , AddLineToPoint centerBottom
+                                       , MoveToPoint middleLeft
+                                       , AddLineToPoint middleRight
+                                       , CloseSubpath ])
+                                       { shapeStrokeColor = color
+                                       , shapeLineWidth = width }
+  where
+    br = boundingRect n
+    centerTop = Point ((pointX $ rectOrigin br) + ((sizeWidth $ rectSize br) / 2))
+                      (pointY $ rectOrigin br)
+    centerBottom = Point (pointX centerTop)
+                         ((pointY $ rectOrigin br) - (sizeHeight $ rectSize br))
+    middleLeft = Point (pointX $ rectOrigin br)
+                       ((pointY $ rectOrigin br) - ((sizeHeight $ rectSize br) / 2))
+    middleRight = Point ((pointX $ rectOrigin br) + (sizeWidth $ rectSize br))
+                        (pointY middleLeft)
