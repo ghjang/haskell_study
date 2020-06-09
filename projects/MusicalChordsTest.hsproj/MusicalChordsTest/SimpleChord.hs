@@ -1,4 +1,4 @@
-module Chord
+module SimpleChord
 ( TriadChord
 , majorTriad
 , minorTriad

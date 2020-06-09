@@ -69,9 +69,9 @@ twelvePitchS = (concat $ (zipWith f pitches (repeat Sharp)))
     f = \p s -> [Pitch Natural p, Pitch s p]
 
 pitchToNum :: Pitch -> Int
-pitchToNum (Pitch Natural p) = getMaybe $ elemIndex (Pitch Natural p) twelvePitchF
-pitchToNum (Pitch Flat p) = getMaybe $ elemIndex (Pitch Flat p) twelvePitchF 
-pitchToNum (Pitch Sharp p) = getMaybe $ elemIndex (Pitch Sharp p) twelvePitchS
+pitchToNum p@(Pitch Natural p') = getMaybe $ elemIndex p twelvePitchF
+pitchToNum p@(Pitch Flat p') = getMaybe $ elemIndex p twelvePitchF 
+pitchToNum p@(Pitch Sharp p') = getMaybe $ elemIndex p twelvePitchS
 
 numToPitchF :: Int -> Maybe Pitch
 numToPitchF n
@@ -91,6 +91,6 @@ enharmonicPitch Flat (Pitch Sharp E) = Pitch Natural F
 enharmonicPitch Flat (Pitch Sharp B) = Pitch Natural C
 enharmonicPitch Sharp (Pitch Flat C) = Pitch Natural B
 enharmonicPitch Sharp (Pitch Flat F) = Pitch Natural E
-enharmonicPitch Flat (Pitch Sharp name) = getMaybe . numToPitchF . pitchToNum $ (Pitch Sharp name)  
-enharmonicPitch Sharp (Pitch Flat name) = getMaybe . numToPitchS . pitchToNum $ (Pitch Flat name) 
+enharmonicPitch Flat p@(Pitch Sharp name) = getMaybe . numToPitchF . pitchToNum $ p
+enharmonicPitch Sharp p@(Pitch Flat name) = getMaybe . numToPitchS . pitchToNum $ p 
 enharmonicPitch _ p = p

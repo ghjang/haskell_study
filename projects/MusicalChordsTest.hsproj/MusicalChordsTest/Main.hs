@@ -2,7 +2,7 @@ import Control.Applicative
 import SimplePitch
 import SimpleInterval
 import SimpleScale
-import Chord
+import SimpleChord
 
 main = mapM_ putStrLn $ zipWith (\x y -> show x
                                            ++ (if hasFlat x || hasSharp x then "\t" else "\t\t")

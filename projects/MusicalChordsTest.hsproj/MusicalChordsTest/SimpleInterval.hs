@@ -41,10 +41,10 @@ i `belowM` p = do
   i' `aboveM` p
 
 above :: Interval -> Pitch -> Pitch
-i `above` (Pitch acc name) = getMaybe $ i `aboveM` (Pitch acc name)
+i `above` p@(Pitch acc name) = getMaybe $ i `aboveM` p
 
 below :: Interval -> Pitch -> Pitch
-i `below` (Pitch acc name) = getMaybe $ i `belowM` (Pitch acc name)
+i `below` p@(Pitch acc name) = getMaybe $ i `belowM` p
 
 diminishInterval :: Int -> Interval -> Interval
 diminishInterval n i = getMaybe . fromIndex $ max (indexOf i - n) 0
