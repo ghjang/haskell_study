@@ -1,0 +1,26 @@
+-- Haskell Playground 1.0
+{-# LANGUAGE RecordWildCards #-}
+
+data Person = Person { name :: String
+                     , age :: Int
+                     , address :: String }
+
+-- enabled by RecordWildCards                     
+f Person{..} = name ++ "," ++ (show age) ++ "," ++ address
+
+f Person { name = "JJ", age = 10, address = "none" }
+
+-- record renaming
+g Person{ name = n, age = a, address = addr }
+    = n ++ "," ++ (show a) ++ "," ++ addr
+
+-- The initialization order of records doesn't matter.
+g Person { age = 10, name = "JJ", address = "none" }
+
+
+-- default person
+person = Person { name = "", age = 0, address = "" }
+
+-- Now, this is possible!
+f person { age = 10 }
+f person { name = "GG", age = 20 }

@@ -1,0 +1,8 @@
+-- Haskell Playground 1.0
+box whiteColor pointZero (Size 1024 768)
+
+addBorder darkGrayColor 1.5 $ box whiteColor (Point 100 100) (Size 1024 768)
+
+addBorder darkGrayColor 1.5 $ box whiteColor pointZero (Size 1024 768)
+
+addBorder redColor 1.5 $ box whiteColor pointZero (Size 1024 768)
