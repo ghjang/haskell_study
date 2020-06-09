@@ -1,13 +1,13 @@
 {-# LANGUAGE DeriveAnyClass #-}
 
-module SimpleInterval
+module SimpleMusic.Interval
 ( Interval (..)
 , above
 , below
 , diminishInterval
 ) where
 
-import SimplePitch
+import SimpleMusic.Pitch
 import Utility
 import Indexable
 

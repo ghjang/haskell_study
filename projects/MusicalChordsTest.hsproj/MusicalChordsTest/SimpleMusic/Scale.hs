@@ -1,6 +1,6 @@
 {-# LANGUAGE DeriveAnyClass #-}
 
-module SimpleScale
+module SimpleMusic.Scale
 ( BasicScale (..)
 , SevenMode (..)
 , scale
@@ -8,8 +8,8 @@ module SimpleScale
 ) where
 
 import Data.List
-import SimplePitch
-import SimpleInterval
+import SimpleMusic.Pitch
+import SimpleMusic.Interval
 import Indexable
 import Utility
 

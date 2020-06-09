@@ -1,4 +1,4 @@
-module SimpleChord
+module SimpleMusic.Chord
 ( TriadChord
 , majorTriad
 , minorTriad
@@ -6,8 +6,8 @@ module SimpleChord
 , augmentedTriad
 ) where
 
-import SimplePitch
-import SimpleInterval
+import SimpleMusic.Pitch
+import SimpleMusic.Interval
 
 type TriadChord = (Pitch, Pitch, Pitch)
 

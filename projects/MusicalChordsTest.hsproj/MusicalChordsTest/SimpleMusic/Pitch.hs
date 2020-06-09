@@ -1,4 +1,4 @@
-module SimplePitch
+module SimpleMusic.Pitch
 ( BasePitchName (..)
 , Accidental (..)
 , Pitch (Pitch)
