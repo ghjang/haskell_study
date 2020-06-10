@@ -22,7 +22,7 @@ f x = (sin x)
          + (sin (3 * x) / 3)
          + (sin (5 * x) / 5)
          + (sin (7 * x) / 7)
-         + (sin (9 * x)/ 9)
+         + (sin (9 * x) / 9)
 
 whiteBgBox = box whiteColor pointZero (Size 1024 768)
 
@@ -37,3 +37,8 @@ node $ [whiteBgBox]
                           0
                           ((negate $ 4 * pi), (4 * pi))
                           $ \x -> 200 * (f x)]
+
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . f)

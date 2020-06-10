@@ -79,3 +79,19 @@ functionPathShape lineColor lineWidth screenWidth yOffset fDomain@(from, to) f
     fPath = [ AddLineToPoint $ Point (x + xOffset) ((f x') + yOffset)
             | x <- [0..]
             | x' <- [from, from + fStep .. to] ]
+
+plot :: Size -> (GFloat, GFloat) -> (GFloat -> GFloat) -> Node ()
+plot screenSize (from, to) f
+  = node $ [whiteBgBox]
+              ++
+           (sequenceA [ axisShape blackColor 1
+                      , borderShape darkGrayColor 1.75]) whiteBgBox
+              ++
+           [functionPathShape redColor
+                              1
+                              (sizeWidth $ spriteSize whiteBgBox)
+                              0
+                              (from, to)
+                              f]
+  where
+    whiteBgBox = box whiteColor pointZero screenSize
