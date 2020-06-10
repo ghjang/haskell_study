@@ -1,4 +1,5 @@
-{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE RecordWildCards,
+             ParallelListComp #-}
 
 import Graphics.SpriteKit
 
@@ -59,3 +60,22 @@ axisShape color width n@Sprite{..} = (shapeNodeWithPath
                        ((pointY $ rectOrigin br) - ((sizeHeight $ rectSize br) / 2))
     middleRight = Point ((pointX $ rectOrigin br) + (sizeWidth $ rectSize br))
                         (pointY middleLeft)
+
+functionPathShape :: Color -> GFloat
+                        -> GFloat -> GFloat
+                        -> (GFloat, GFloat) -> (GFloat -> GFloat)
+                        -> Node u
+functionPathShape lineColor lineWidth screenWidth yOffset fDomain@(from, to) f
+  = (shapeNodeWithPath
+        $ [MoveToPoint $ Point xOffset ((f from) + yOffset)]
+             ++
+          tail fPath)
+        { shapeStrokeColor = lineColor
+        , shapeLineWidth = lineWidth }
+  where
+    xOffset = negate $ screenWidth / 2
+    domainWidth = abs $ to - from
+    fStep = domainWidth / screenWidth
+    fPath = [ AddLineToPoint $ Point (x + xOffset) ((f x') + yOffset)
+            | x <- [0..]
+            | x' <- [from, from + fStep .. to] ]
