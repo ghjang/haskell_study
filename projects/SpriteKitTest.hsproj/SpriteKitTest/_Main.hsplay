@@ -6,7 +6,7 @@ evenNums    = [2,4..]
 oddNums     = [3,5..]
 squaredNums = map (\x -> x * x) [2..]
 
-harmonicTerm m = (\y -> y / m) . sin . (m *)
+harmonicTerm m = (/ m) . sin . (m *)
 
 takeHarmonicTerm n ms = take n $ map harmonicTerm (1:ms)
 
