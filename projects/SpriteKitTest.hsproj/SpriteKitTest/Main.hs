@@ -81,7 +81,7 @@ functionPathShape lineColor lineWidth screenWidth yOffset fDomain@(from, to) f
             | x' <- [from, from + fStep .. to] ]
 
 plot :: Size -> (GFloat, GFloat) -> (GFloat -> GFloat) -> Node ()
-plot screenSize (from, to) f
+plot outputSize (from, to) f
   = node $ [whiteBgBox]
               ++
            (sequenceA [ axisShape blackColor 1
@@ -94,4 +94,4 @@ plot screenSize (from, to) f
                               (from, to)
                               f]
   where
-    whiteBgBox = box whiteColor pointZero screenSize
+    whiteBgBox = box whiteColor pointZero outputSize

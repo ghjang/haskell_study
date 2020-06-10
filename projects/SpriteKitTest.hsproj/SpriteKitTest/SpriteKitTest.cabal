@@ -8,8 +8,10 @@ x-last-ide-version: HfM1.7.0
 executable SpriteKitTest
     main-is: Main.hs
     other-modules:
-        REcordSyntaxTest
+        PrimeNumber
+        RecordSyntaxTest
     default-language: Haskell2010
     build-depends:
-        base -any,
-        spritekit -any
+        mtl -any,
+        spritekit -any,
+        base -any
