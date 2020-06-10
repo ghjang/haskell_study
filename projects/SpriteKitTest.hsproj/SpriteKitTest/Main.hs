@@ -2,6 +2,7 @@
              ParallelListComp #-}
 
 import Graphics.SpriteKit
+import PrimeNumber (primes)
 
 box :: Color -> Point -> Size -> Node ()
 box color position size = (spriteWithColorSize color size)

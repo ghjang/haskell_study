@@ -1,4 +1,43 @@
 -- Haskell Playground 1.0
+import PrimeNumber (primes)
+
+naturalNums = [2..]
+evenNums    = [2,4..]
+oddNums     = [3,5..]
+squaredNums = map (\x -> x * x) [2..]
+
+harmonicTerm m = (\y -> y / m) . sin . (m *)
+
+takeHarmonicTerm n ms = take n $ map harmonicTerm (1:ms)
+
+harmonicTermSum x ms = sum $ (sequenceA $ takeHarmonicTerm 12 ms) x
+
+naturalHarmonics x = harmonicTermSum x naturalNums
+evenHarmonics x = harmonicTermSum x evenNums
+oddHarmonics x = harmonicTermSum x oddNums
+squaredHarmonics x = harmonicTermSum x squaredNums
+primeHarmonics x = harmonicTermSum x $ map fromIntegral primes
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . naturalHarmonics)
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . evenHarmonics)
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . oddHarmonics)
+     
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . squaredHarmonics)
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . primeHarmonics)
+
 [1, 4 .. 10]
 
 box whiteColor pointZero (Size 1024 768)
