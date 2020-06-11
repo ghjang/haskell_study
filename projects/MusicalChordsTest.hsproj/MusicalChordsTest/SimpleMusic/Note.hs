@@ -39,8 +39,7 @@ noteFromMidiNumber :: Int -> Maybe Note
 noteFromMidiNumber n
   | n < 0 || n > 127 = Nothing
   | otherwise = let
-                  (q, r) = (n `div` 12, n `mod` 12)
-                  octave = q - 1
+                  octave = (n `div` 12) - 1
                   pitch = numToPitch $ n - (12 * octave) - 12
                 in
                   Just $ note { octave = octave
