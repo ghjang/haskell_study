@@ -1,0 +1,29 @@
+-- Haskell Playground 1.0
+pitchToNum $ natural A
+
+(2 ** (1 / 12))
+
+numToPitch 11
+numToPitch 12
+
+midiNumberOf a4
+
+midiNumberOf $ note { octave = negate 1, pitch = Nothing }
+midiNumberOf $ note { octave = negate 3, pitch = Nothing }
+
+midiNumberOf $ note { octave = negate 1, pitch = Just $ natural C }
+midiNumberOf $ note { octave = 3, pitch = Just $ natural F }
+
+noteFromMidiNumber 69
+
+--map noteFromMidiNumber [0..127]
+map noteFromMidiNumber [0,12,24,36,48,60,72,84,96,108,120]
+map noteFromMidiNumber [11,23,35,47,59,71,83,95,107,119]
+
+frequencyOf a4
+
+frequencyOf $ note { octave = 3, pitch = Just $ natural A }
+frequencyOf $ note { octave = 5, pitch = Just $ natural A }
+
+frequencyOf $ note { octave = 2, pitch = Just $ natural G }
+frequencyOf $ note { octave = 6, pitch = Just $ natural G }

@@ -8,11 +8,12 @@ x-last-ide-version: HfM1.7.0
 executable MusicalChordsTest
     main-is: Main.hs
     other-modules:
-        Indexable
         Utility
+        Indexable
         SimpleMusic.Interval
         SimpleMusic.Pitch
         SimpleMusic.Chord
+        SimpleMusic.Note
         SimpleMusic.Scale
     default-language: Haskell2010
     build-depends:
