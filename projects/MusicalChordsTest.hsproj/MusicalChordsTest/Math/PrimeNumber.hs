@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleContexts #-}
 
-module PrimeNumber
+module Math.PrimeNumber
 ( primes
 ) where
   

@@ -1,4 +1,4 @@
-module SimpleMusic.SinusoidalFunction
+module Math.SinusoidalFunction
 ( naturalHarmonics
 , evenHarmonics
 , oddHarmonics
@@ -6,7 +6,7 @@ module SimpleMusic.SinusoidalFunction
 , primeHarmonics
 ) where
 
-import PrimeNumber (primes)
+import Math.PrimeNumber (primes)
 
 naturalNums = [2..]
 evenNums    = [2,4..]
