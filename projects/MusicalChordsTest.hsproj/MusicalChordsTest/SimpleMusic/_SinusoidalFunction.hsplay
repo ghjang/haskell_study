@@ -1,0 +1,10 @@
+-- Haskell Playground 1.0
+naturalHarmonics (pi / 2)
+
+evenHarmonics (pi / 2)
+
+oddHarmonics (pi / 2)
+
+squaredHarmonics (pi / 2)
+
+primeHarmonics (pi / 2)

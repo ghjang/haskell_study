@@ -9,12 +9,15 @@ executable MusicalChordsTest
     main-is: Main.hs
     other-modules:
         Indexable
-        SimpleMusic.Note
-        SimpleMusic.Interval
-        SimpleMusic.Pitch
-        SimpleMusic.Scale
+        SimpleMusic.SinusoidalFunction
         SimpleMusic.Chord
+        SimpleMusic.Scale
+        SimpleMusic.Interval
+        SimpleMusic.Note
+        SimpleMusic.Pitch
+        PrimeNumber
         Utility
     default-language: Haskell2010
     build-depends:
+        mtl -any,
         base -any
