@@ -1,3 +1,5 @@
+{-# LANGUAGE BangPatterns #-}
+
 module SimpleMusic.SinusoidalSound
 ( soundSample
 , minMaxPair
@@ -19,12 +21,15 @@ soundSample samplingRate duration periodicFunction functionPeriod frequency
     fStep = (functionPeriod * frequency) / samplingRate'
     nSample = floor $ duration * samplingRate'
 
+soundSample3 :: Int -> Float -> (Float -> Float) -> Float -> [Float] -> [Float]
+soundSample3 samplingRate duration periodicFunction functionPeriod (freq1:freq2:freq3:[]) = []
+
 minMaxPair :: [Float] -> (Float, Float)
 --minMaxPair = foldl f (maxValue :: Float, minValue :: Float) -- FIXME
 minMaxPair = foldl f (0, 0)
   where
-    f (minVal, maxVal) x = (if x < minVal then x else minVal
-                           , if x > maxVal then x else maxVal)
+    f (!minVal, !maxVal) x = (if x < minVal then x else minVal
+                             , if x > maxVal then x else maxVal)
 
 adjustMaxAmplitude :: Float -> [Float] -> [Float]
 adjustMaxAmplitude newAmplitude samples

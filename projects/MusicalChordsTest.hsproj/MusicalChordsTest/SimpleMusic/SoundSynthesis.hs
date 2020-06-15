@@ -55,8 +55,8 @@ chordSoundSample :: Octave -> BPM -> Duration -> TriadChord -> [Float]
 chordSoundSample octave bpm noteDuration triad
   = [ (r + t + f)
     | r <- noteSoundSample bpm root
-    | t <- adjustSamples 0.75 $ noteSoundSample bpm third
-    | f <- adjustSamples 0.5 $ noteSoundSample bpm fifth ]
+    | t <- {-- adjustSamples 0.75 $ --} noteSoundSample bpm third
+    | f <- {-- adjustSamples 0.5 $ --} noteSoundSample bpm fifth ]
   where
     (root, third, fifth) = getTriplet $ triadChordNote octave triad noteDuration
     ----
