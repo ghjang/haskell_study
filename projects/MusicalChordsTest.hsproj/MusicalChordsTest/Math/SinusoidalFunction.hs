@@ -4,6 +4,7 @@ module Math.SinusoidalFunction
 , oddHarmonics
 , squaredHarmonics
 , primeHarmonics
+, musicalHarmonics
 ) where
 
 import Math.PrimeNumber (primes)
@@ -37,3 +38,23 @@ squaredHarmonics = harmonicTermSum squaredNums
 
 primeHarmonics :: Float -> Float
 primeHarmonics = harmonicTermSum (map fromIntegral primes)
+
+
+{--
+musicalHarmonics :: Float -> Float
+musicalHarmonics x = sin x / 1
+                        + sin (2 * x) / 2
+                        + sin (3 / 2 * x) / 3
+                        + sin (4 / 3 * x) / 4
+                        -- + sin (5 / 3 * x) / 5
+                        -- + sin (5 / 4 * x) / 6
+                        -- + sin (8 / 5 * x) / 7
+                        -- + sin (6 / 5 * x) / 8
+                        --}
+
+
+musicalHarmonics :: Float -> Float
+musicalHarmonics x = sin x / 1
+                        + sin (2 * x) / 2
+                        -- + sin ((2 ** (1 / 7)) * x) / (2 ** (1 / 7))
+                        -- + sin ((2 ** (1 / 5)) * x) / (2 ** (1 / 5))

@@ -11,12 +11,13 @@ executable MusicalChordsTest
         Utility
         Math.PrimeNumber
         Math.SinusoidalFunction
+        Tuple
         Indexable
+        SimpleMusic.Note
+        SimpleMusic.SinusoidalSound
         SimpleMusic.Chord
         SimpleMusic.Pitch
         SimpleMusic.Scale
-        SimpleMusic.SinusoidalSound
-        SimpleMusic.Note
         SimpleMusic.Interval
     default-language: Haskell2010
     build-depends:

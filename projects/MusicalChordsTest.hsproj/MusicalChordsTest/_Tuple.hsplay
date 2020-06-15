@@ -1,0 +1,6 @@
+-- Haskell Playground 1.0
+Triplet (1, 2, 3)
+
+fmap show $ Triplet (1, 2, 3)
+
+rotateLeft $ Triplet (1, 2, 3)

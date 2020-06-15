@@ -7,9 +7,23 @@ import SimpleMusic.Chord
 import SimpleMusic.SinusoidalSound
 import Math.SinusoidalFunction
 
-main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 sin
+--main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 sin
 
---main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 naturalHarmonics
+{--
+main = writeRawWaveDataToFile "output.bin"
+          $ (soundSample 44100 220 0.5 sin)
+              ++ (soundSample 44100 440 0.5 sin)
+              ++ (soundSample 44100 220 1 sin)
+              --}
+
+{--
+main = writeRawWaveDataToFile "output.bin"
+          $ (soundSample 44100 220 1.5 musicalHarmonics)
+              ++ (soundSample 44100 440 1 musicalHarmonics)
+              ++ (soundSample 44100 220 1.5 musicalHarmonics)
+              --}
+
+main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 naturalHarmonics
 
 --main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 evenHarmonics
 
