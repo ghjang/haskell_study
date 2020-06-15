@@ -1,5 +1,6 @@
 module SimpleMusic.SinusoidalSound
 ( soundSample
+, minMaxPair
 , adjustMaxAmplitude
 , writeRawWaveDataToFile
 ) where

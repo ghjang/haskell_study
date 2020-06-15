@@ -1,7 +1,10 @@
+{-# LANGUAGE ParallelListComp #-}
+
 module SimpleMusic.SoundSynthesis
 ( BPM (..)
 , noteSoundSample'
 , noteSoundSample
+, chordSoundSample
 ) where
   
 import SimpleMusic.Pitch
@@ -9,6 +12,7 @@ import SimpleMusic.Note
 import SimpleMusic.Chord
 import SimpleMusic.SinusoidalSound
 import Utility
+import Tuple
 
 data BPM = BPM Duration Int
 
@@ -46,3 +50,15 @@ noteSoundSample (BPM Quater bpm) note = getSamples $ frequencyOf note
                                          defaultPeriodicFunction
                                          defaultFunctionPeriod
                                          freq
+
+chordSoundSample :: Octave -> BPM -> Duration -> TriadChord -> [Float]
+chordSoundSample octave bpm noteDuration triad
+  = [ (r + t + f)
+    | r <- noteSoundSample bpm root
+    | t <- adjustSamples 0.75 $ noteSoundSample bpm third
+    | f <- adjustSamples 0.5 $ noteSoundSample bpm fifth ]
+  where
+    (root, third, fifth) = getTriplet $ triadChordNote octave triad noteDuration
+    ----
+    adjustSamples ratio samples = let (_, maxVal) = minMaxPair samples
+                                  in adjustMaxAmplitude (maxVal * ratio) samples

@@ -31,4 +31,4 @@ frequencyOf $ note { octave = 6, pitch = Just $ natural G }
 majorTriad $ natural A
 triadChordNote 4 $ majorTriad $ natural A
 
-fmap frequencyOf $ triadChordNote 4 $ majorTriad $ natural A
+fmap frequencyOf $ triadChordNote 4 (majorTriad $ natural A) Quater

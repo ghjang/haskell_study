@@ -11,4 +11,7 @@ getZipList $ ZipList [majorTriad, minorTriad, minorTriad, majorTriad, majorTriad
 
 map majorScaleDiatonicTriad $ map (scale Major) twelvePitchF
 
-main
+
+scale Major $ natural C
+
+majorScaleDiatonicTriad $ (scale Major $ natural C)

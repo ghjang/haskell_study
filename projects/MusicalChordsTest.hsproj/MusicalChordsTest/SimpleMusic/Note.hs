@@ -8,6 +8,7 @@ module SimpleMusic.Note
 , midiNumberOf
 , noteFromMidiNumber
 , frequencyOf
+, triadChordNote
 ) where
 
 import SimpleMusic.Pitch
@@ -61,11 +62,13 @@ frequencyOf note = case midiNumberOf note of
              in
                 Just (freqOfA4 * ratio)
 
-triadChordNote :: Int -> TriadChord -> Triplet Note
-triadChordNote rootOctave triad@(Triplet (root, third, fifth)) = fmap toNote triad
+triadChordNote :: Int -> TriadChord -> Duration -> Triplet Note
+triadChordNote rootOctave triad@(Triplet (root, third, fifth)) duration' = fmap toNote triad
   where
-    toNote pitch@(Pitch acc name) = if pitch == root then note { octave = rootOctave, pitch = Just root }
-                                                     else note { octave = adjustOctave root pitch, pitch = Just pitch }
+    toNote pitch@(Pitch acc name)
+      = if pitch == root then note { octave = rootOctave, pitch = Just root, duration = duration' }
+                         else note { octave = adjustOctave root pitch, pitch = Just pitch, duration = duration' }
+    ----
     adjustOctave p1 p2 = let diff = (pitchToNum p2) - (pitchToNum p1)
                          in if diff < 0 then rootOctave + 1
                                         else rootOctave

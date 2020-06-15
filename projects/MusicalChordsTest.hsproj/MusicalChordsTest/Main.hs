@@ -1,46 +1,32 @@
-import Control.Applicative
-
 import SimpleMusic.Pitch
 import SimpleMusic.Note
 import SimpleMusic.Interval
 import SimpleMusic.Scale
 import SimpleMusic.Chord
 import SimpleMusic.SinusoidalSound
-import Math.SinusoidalFunction
 import SimpleMusic.SoundSynthesis
-
---main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 sin
-
-{--
-main = writeRawWaveDataToFile "output.bin"
-          $ (soundSample 44100 220 0.5 sin)
-              ++ (soundSample 44100 440 0.5 sin)
-              ++ (soundSample 44100 220 1 sin)
-              --}
+import SimpleMusic.DiatonicChord
+import Math.SinusoidalFunction
 
 {--
-main = writeRawWaveDataToFile "output.bin"
-          $ (soundSample 44100 220 1.5 musicalHarmonics)
-              ++ (soundSample 44100 440 1 musicalHarmonics)
-              ++ (soundSample 44100 220 1.5 musicalHarmonics)
-              --}
+main = writeRawWaveDataToFile "output.bin" $ (adjustMaxAmplitude 0.75
+                                                $ chordSoundSample 4 (BPM Quater 60) Quater
+                                                $ minorTriad $ natural D)
+                                                  ++
+                                             (adjustMaxAmplitude 1.0
+                                                $ chordSoundSample 4 (BPM Quater 60) Quater
+                                                $ majorTriad $ natural G)
+                                                  ++
+                                             (adjustMaxAmplitude 0.75
+                                                $ chordSoundSample 4 (BPM Quater 60) Quater
+                                                $ majorTriad $ natural C)
+--}
 
---main = writeRawWaveDataToFile "output.bin" $ noteSoundSample' 1 $ note { octave = 4, pitch = Just $ natural A }
-main = writeRawWaveDataToFile "output.bin" $ noteSoundSample (BPM Quater 60) note { octave = 4,
-                                                                                    pitch = Just $ natural A,
-                                                                                    duration = Whole }
-
-
---main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 evenHarmonics
-
---main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 oddHarmonics
-
---main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 squaredHarmonics
-
---main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 0.5 squaredHarmonics
-
---main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 primeHarmonics
-
+main = writeRawWaveDataToFile "output.bin" $ concat
+                                           $ map f
+                                           $ majorScaleDiatonicTriad (scale Major $ natural C)
+  where
+    f chord = adjustMaxAmplitude 1 $ chordSoundSample 4 (BPM Quater 60) Quater chord
 
 {--
 main = mapM_ putStrLn $ zipWith (\x y -> show x
@@ -50,19 +36,5 @@ main = mapM_ putStrLn $ zipWith (\x y -> show x
                                 twelvePitchF
                                 twelveMajorScaleDiatonicTriad
   where
-    twelveMajorScaleDiatonicTriad = map majorScaleDiatonicTriad $ map (scale Major) twelvePitchF
-    
+    twelveMajorScaleDiatonicTriad = map majorScaleDiatonicTriad $ map (scale Major) twelvePitchF    
 --}
-
-type Scale = [Pitch]
-
-majorScaleDiatonicTriad :: Scale -> [TriadChord]
-majorScaleDiatonicTriad s = getZipList $ ZipList fs <*> ZipList s
-  where
-    fs = [ majorTriad
-         , minorTriad
-         , minorTriad
-         , majorTriad
-         , majorTriad
-         , minorTriad
-         , diminishedTriad ]
