@@ -7,3 +7,5 @@ noteSoundSample' 1 $ note { octave = 4, pitch = Just $ natural A }
 noteSoundSample (BPM Quater 60) $ note { octave = 4, pitch = Just $ natural A }
 
 chordSoundSample 4 (BPM Quater 60) Quater $ majorTriad $ natural A
+
+chordSoundSampleAsync 4 (BPM Quater 60) Quater $ majorTriad $ natural A

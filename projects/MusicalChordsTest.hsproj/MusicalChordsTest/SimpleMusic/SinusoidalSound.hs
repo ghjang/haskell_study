@@ -4,7 +4,7 @@ module SimpleMusic.SinusoidalSound
 ( soundSample
 , minMaxPair
 , adjustMaxAmplitude
-, writeRawWaveDataToFile
+, writeRawPcmWaveDataToFile
 ) where
 
 import qualified Data.ByteString.Lazy as B
@@ -39,6 +39,6 @@ adjustMaxAmplitude newAmplitude samples
     maxVal' = max (abs $ minVal) (abs $ maxVal)
     ratio = newAmplitude / maxVal'
 
-writeRawWaveDataToFile :: String -> [Float] -> IO ()
-writeRawWaveDataToFile file ws
+writeRawPcmWaveDataToFile :: String -> [Float] -> IO ()
+writeRawPcmWaveDataToFile file ws
   = B.writeFile file $ B.toLazyByteString $ fold $ map B.floatLE ws

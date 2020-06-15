@@ -5,8 +5,11 @@ module SimpleMusic.SoundSynthesis
 , noteSoundSample'
 , noteSoundSample
 , chordSoundSample
+, chordSoundSampleAsync
 ) where
   
+import Control.Concurrent.Async
+
 import SimpleMusic.Pitch
 import SimpleMusic.Note
 import SimpleMusic.Chord
@@ -55,10 +58,14 @@ chordSoundSample :: Octave -> BPM -> Duration -> TriadChord -> [Float]
 chordSoundSample octave bpm noteDuration triad
   = [ (r + t + f)
     | r <- noteSoundSample bpm root
-    | t <- {-- adjustSamples 0.75 $ --} noteSoundSample bpm third
-    | f <- {-- adjustSamples 0.5 $ --} noteSoundSample bpm fifth ]
+    | t <- noteSoundSample bpm third
+    | f <- noteSoundSample bpm fifth ]
   where
     (root, third, fifth) = getTriplet $ triadChordNote octave triad noteDuration
-    ----
-    adjustSamples ratio samples = let (_, maxVal) = minMaxPair samples
-                                  in adjustMaxAmplitude (maxVal * ratio) samples
+
+chordSoundSampleAsync :: Octave -> BPM -> Duration -> TriadChord -> IO [Float]
+chordSoundSampleAsync octave bpm noteDuration triad = do
+  (rs:ts:fs:[]) <- mapConcurrently (\pitch -> return $ noteSoundSample bpm pitch) [root, third, fifth]
+  return $ zipWith3 (\p1 p2 p3 -> p1 + p2 + p3) rs ts fs
+    where
+      (root, third, fifth) = getTriplet $ triadChordNote octave triad noteDuration
