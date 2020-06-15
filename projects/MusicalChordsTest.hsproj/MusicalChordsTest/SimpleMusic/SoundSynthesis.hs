@@ -1,5 +1,6 @@
 module SimpleMusic.SoundSynthesis
-( noteSoundSample'
+( BPM (..)
+, noteSoundSample'
 , noteSoundSample
 ) where
   
@@ -8,6 +9,8 @@ import SimpleMusic.Note
 import SimpleMusic.Chord
 import SimpleMusic.SinusoidalSound
 import Utility
+
+data BPM = BPM Duration Int
 
 defaultSamplingRate = 44100 :: Int
 
@@ -25,17 +28,17 @@ noteSoundSample' duration note = getSamples $ frequencyOf note
                                          defaultFunctionPeriod
                                          freq
 
-noteSoundSample :: Int -> Note -> [Float]
-noteSoundSample bpm note = getSamples $ frequencyOf note
+noteSoundSample :: BPM -> Note -> [Float]
+noteSoundSample (BPM Quater bpm) note = getSamples $ frequencyOf note
   where
     defaultSamplingRate' = fromIntegral defaultSamplingRate
     bpm' = fromIntegral bpm
     duration' = case duration note of
-                  Whole -> (60 * 4) / bpm'
-                  Half -> (60 * 2) / bpm' 
-                  Quater -> (60 * 1) / bpm' 
-                  Eighth -> (60 / 2) / bpm'
-                  Sixteenth -> (60 / 4) / bpm'
+                  Whole     -> (60 / bpm') * 4
+                  Half      -> (60 / bpm') * 2
+                  Quater    -> (60 / bpm') * 1 
+                  Eighth    -> (60 / bpm') / 2
+                  Sixteenth -> (60 / bpm') / 4
     ----
     getSamples Nothing = replicate (floor $ duration' * defaultSamplingRate') 0.0
     getSamples (Just freq) = soundSample defaultSamplingRate

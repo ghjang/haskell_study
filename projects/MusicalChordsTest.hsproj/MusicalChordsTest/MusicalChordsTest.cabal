@@ -8,18 +8,18 @@ x-last-ide-version: HfM1.7.0
 executable MusicalChordsTest
     main-is: Main.hs
     other-modules:
-        Indexable
-        Tuple
         Utility
-        Math.PrimeNumber
-        Math.SinusoidalFunction
-        SimpleMusic.SoundSynthesis
-        SimpleMusic.Note
-        SimpleMusic.Scale
+        Tuple
         SimpleMusic.Interval
         SimpleMusic.Pitch
-        SimpleMusic.SinusoidalSound
+        SimpleMusic.Scale
+        SimpleMusic.SoundSynthesis
         SimpleMusic.Chord
+        SimpleMusic.Note
+        SimpleMusic.SinusoidalSound
+        Indexable
+        Math.PrimeNumber
+        Math.SinusoidalFunction
     default-language: Haskell2010
     build-depends:
         bytestring -any,

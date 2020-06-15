@@ -26,9 +26,9 @@ main = writeRawWaveDataToFile "output.bin"
               --}
 
 --main = writeRawWaveDataToFile "output.bin" $ noteSoundSample' 1 $ note { octave = 4, pitch = Just $ natural A }
-main = writeRawWaveDataToFile "output.bin" $ noteSoundSample 60 note { octave = 4,
-                                                                       pitch = Just $ natural A,
-                                                                       duration = Whole }
+main = writeRawWaveDataToFile "output.bin" $ noteSoundSample (BPM Quater 60) note { octave = 4,
+                                                                                    pitch = Just $ natural A,
+                                                                                    duration = Whole }
 
 
 --main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 evenHarmonics
