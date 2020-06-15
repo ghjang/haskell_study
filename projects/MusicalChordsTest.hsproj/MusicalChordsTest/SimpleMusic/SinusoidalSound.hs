@@ -10,12 +10,12 @@ import Data.Foldable
 
 --import Numeric.Limits -- FIXME
 
-soundSample :: Int -> Float -> Float -> (Float -> Float) -> [Float]
-soundSample samplingRate frequency duration f
-  = take nSample $ map f [0.0, fStep ..]
+soundSample :: Int -> Float -> (Float -> Float) -> Float -> Float -> [Float]
+soundSample samplingRate duration periodicFunction functionPeriod frequency
+  = take nSample $ map periodicFunction [0.0, fStep ..]
   where
     samplingRate' = fromIntegral samplingRate
-    fStep = (2 * pi * frequency) / samplingRate'
+    fStep = (functionPeriod * frequency) / samplingRate'
     nSample = floor $ duration * samplingRate'
 
 minMaxPair :: [Float] -> (Float, Float)

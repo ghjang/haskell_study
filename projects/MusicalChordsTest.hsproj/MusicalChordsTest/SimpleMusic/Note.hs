@@ -2,8 +2,8 @@
 
 module SimpleMusic.Note
 ( Octave
-, Duration
-, Note
+, Duration (..)
+, Note (..)
 , note
 , midiNumberOf
 , noteFromMidiNumber
@@ -25,7 +25,7 @@ data Note = Note { octave   :: Octave
                  , duration :: Duration }
       deriving (Show)
 
-note = Note { octave = 4, pitch = Nothing, duration = Whole }
+note = Note { octave = 4, pitch = Nothing, duration = Quater }
 
 a4 = note { pitch = Just $ natural A }
 

@@ -1,11 +1,13 @@
 import Control.Applicative
 
 import SimpleMusic.Pitch
+import SimpleMusic.Note
 import SimpleMusic.Interval
 import SimpleMusic.Scale
 import SimpleMusic.Chord
 import SimpleMusic.SinusoidalSound
 import Math.SinusoidalFunction
+import SimpleMusic.SoundSynthesis
 
 --main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 sin
 
@@ -23,7 +25,11 @@ main = writeRawWaveDataToFile "output.bin"
               ++ (soundSample 44100 220 1.5 musicalHarmonics)
               --}
 
-main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 naturalHarmonics
+--main = writeRawWaveDataToFile "output.bin" $ noteSoundSample' 1 $ note { octave = 4, pitch = Just $ natural A }
+main = writeRawWaveDataToFile "output.bin" $ noteSoundSample 60 note { octave = 4,
+                                                                       pitch = Just $ natural A,
+                                                                       duration = Whole }
+
 
 --main = writeRawWaveDataToFile "output.bin" $ soundSample 44100 220 1 evenHarmonics
 

@@ -1,10 +1,10 @@
 -- Haskell Playground 1.0
-soundSample 44100 440 1 sin
+soundSample 44100 1 sin (2 * pi) 440
 
-length $ soundSample 44100 440 1 sin
+length $ soundSample 44100 1 sin (2 * pi) 440
 
-minMaxPair $ soundSample 44100 440 1 sin
+minMaxPair $ soundSample 44100 1 sin (2 * pi) 440
 
-adjustMaxAmplitude 0.5 $ soundSample 44100 440 1 sin
+adjustMaxAmplitude 0.5 $ soundSample 44100 1 sin (2 * pi) 440
 
-minMaxPair $ adjustMaxAmplitude 0.5 $ soundSample 44100 440 1 sin
+minMaxPair $ adjustMaxAmplitude 0.5 $ soundSample 44100 1 sin (2 * pi) 440
