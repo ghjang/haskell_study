@@ -1,0 +1,81 @@
+-- Haskell Playground 1.0
+naturalNums = [2..]
+evenNums    = [2,4..]
+oddNums     = [3,5..]
+squaredNums = map (\x -> x * x) [2..]
+
+harmonicTerm m = (/ m) . sin . (m *)
+
+takeHarmonicTerm n ms = take n $ map harmonicTerm (1:ms)
+
+harmonicTermSum x ms = sum $ (sequenceA $ takeHarmonicTerm 12 ms) x
+
+naturalHarmonics x = harmonicTermSum x naturalNums
+evenHarmonics x = harmonicTermSum x evenNums
+oddHarmonics x = harmonicTermSum x oddNums
+squaredHarmonics x = harmonicTermSum x squaredNums
+primeHarmonics x = harmonicTermSum x $ map fromIntegral primes
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . naturalHarmonics)
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . evenHarmonics)
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . oddHarmonics)
+     
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . squaredHarmonics)
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . primeHarmonics)
+
+[1, 4 .. 10]
+
+box whiteColor pointZero (Size 1024 768)
+
+borderShape darkGrayColor 1.75 $ box whiteColor pointZero (Size 1024 768)
+
+axisShape blackColor 1 $ box whiteColor pointZero (Size 1024 768)
+
+node $ [box whiteColor pointZero (Size 1024 768)]
+          ++
+       ((sequenceA [axisShape blackColor 1, borderShape darkGrayColor 1.75]) $ box whiteColor pointZero (Size 1024 768))
+
+functionPathShape redColor 1 1024 0 ((negate $ 4 * pi), (4 * pi)) $ \x -> 10 * (sin x)
+
+
+-- simple sine
+-- f x = 200 * sin x
+
+-- a kind of square wave
+f x = (sin x)
+         + (sin (3 * x) / 3)
+         + (sin (5 * x) / 5)
+         + (sin (7 * x) / 7)
+         + (sin (9 * x) / 9)
+
+whiteBgBox = box whiteColor pointZero (Size 1024 768)
+
+node $ [whiteBgBox]
+          ++
+       (sequenceA [ axisShape blackColor 1
+                  , borderShape darkGrayColor 1.75]) whiteBgBox
+          ++
+       [functionPathShape redColor
+                          1
+                          (sizeWidth $ spriteSize whiteBgBox)
+                          0
+                          ((negate $ 4 * pi), (4 * pi))
+                          $ \x -> 200 * (f x)]
+
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . f)

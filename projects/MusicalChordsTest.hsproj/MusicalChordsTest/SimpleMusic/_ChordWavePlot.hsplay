@@ -1,0 +1,28 @@
+-- Haskell Playground 1.0
+fmap show $ Triplet (1, 2, 3)
+
+fmap frequencyOf $ triadChordNote 4 (majorTriad $ natural C) Quater
+
+plot (Size 1024 768)
+     ((negate $ 4 * pi), (4 * pi))
+     ((200 *) . sin)
+
+(sceneWithSize $ Size 1024 768) { sceneChildren = [(plot (Size 1024 768)
+                                                         ((negate $ 4 * pi), (4 * pi))
+                                                         ((200 *) . sin))
+                                                  ] }
+
+(sceneWithSize $ Size 1024 768) { sceneChildren = [(plot (Size 1024 768)
+                                                         ((negate $ 4 * pi), (4 * pi))
+                                                         ((200 *) . sin))
+                                                  ]
+                                , sceneAnchorPoint = Point 0.5 0.5 }
+
+(sceneWithSize $ Size 1024 768) { sceneChildren = [(plot (Size 512 384)
+                                                         ((negate $ 4 * pi), (4 * pi))
+                                                         ((200 *) . sin))
+                                                  ]
+                                , sceneAnchorPoint = Point 0.5 0.5 }
+
+sceneWithTriadChordPlot $ majorTriad $ natural C
+
