@@ -17,8 +17,7 @@ sceneWithTriadChordPlot triad = (sceneWithSize $ Size 1024 768)
 
 nodeWithTriadChordPlot :: TriadChord -> [Node ()]
 nodeWithTriadChordPlot triad = [ (plot (Size 1024 768) fRange ((75 *) . f))
-                               , labelWithText "C Major Scale" (Point (negate 256) 300)
-                               , labelWithText "B Diminished Triad (B, D, F)" (Point 256 300)]
+                               , labelWithText (show . getTriplet $ triad) (Point (negate 256) 300)]
   where
     (Just rootFreq, Just thirdFreq, Just fifthFreq)
         = getTriplet $ fmap frequencyOf
@@ -31,6 +30,6 @@ nodeWithTriadChordPlot triad = [ (plot (Size 1024 768) fRange ((75 *) . f))
     ----
     labelWithText txt point = (labelNodeWithFontNamed "Helvetica Neue Bold")
                                 { labelText = txt
-                                , labelFontSize = 35
+                                , labelFontSize = 55
                                 , labelFontColor = darkGrayColor
                                 , nodePosition = point }
