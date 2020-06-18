@@ -1,0 +1,16 @@
+-- Haskell Playground 1.0
+createCircularListZipper []
+
+zipper = createCircularListZipper [1, 2, 3]
+
+next zipper
+(next .snd) $ next zipper
+(next . snd) . (next .snd) $ next zipper
+(next . snd) . (next . snd) . (next .snd) $ next zipper
+
+prev zipper
+(prev .snd) $ prev zipper
+(prev . snd) . (prev .snd) $ prev zipper
+(prev . snd) . (prev . snd) . (prev .snd) $ prev zipper
+
+(prev . snd) . (next .snd) $ next zipper
