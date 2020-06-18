@@ -2,6 +2,7 @@
 createCircularListZipper []
 
 zipper = createCircularListZipper [1, 2, 3]
+zipper
 
 next zipper
 (next .snd) $ next zipper
@@ -14,3 +15,66 @@ prev zipper
 (prev . snd) . (prev . snd) . (prev .snd) $ prev zipper
 
 (prev . snd) . (next .snd) $ next zipper
+
+
+s = do
+  nextItem
+  nextItem
+  
+runState s $ createCircularListZipper [1, 2, 3]
+
+s1 = do
+  nextItem
+  nextItem
+  nextItem
+    
+runState s1 $ createCircularListZipper [1, 2, 3]
+
+s2 = do
+  nextItem
+  nextItem
+  nextItem
+  prevItem
+    
+runState s2 $ createCircularListZipper [1, 2, 3]
+
+s3 = do
+  prevItem
+  prevItem
+  prevItem
+  nextItem
+      
+runState s3 $ createCircularListZipper [1, 2, 3]
+
+s4 = do
+  nextItem
+  nextItem
+  nextItem
+  nextItem
+  nextItem
+  nextItem
+    
+runState s4 $ createCircularListZipper [1, 2, 3]
+
+s5 = do
+  prevItem
+  prevItem
+  prevItem
+  prevItem
+  prevItem
+  prevItem
+  nextItem
+    
+runState s5 $ createCircularListZipper [1, 2, 3]
+
+stat = do
+  a <- nextItem
+  nextItem
+  b <- nextItem
+  c <- prevItem
+  return (a, b, c)
+  
+fst . runState stat $ createCircularListZipper [1, 2, 3]
+
+take 10 . fst . runState (sequence $ repeat prevItem)
+  $ createCircularListZipper [1, 2, 3]
