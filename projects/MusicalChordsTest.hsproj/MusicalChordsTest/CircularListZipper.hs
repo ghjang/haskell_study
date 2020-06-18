@@ -9,25 +9,24 @@ module CircularListZipper
   
 import Control.Monad.State
 
-data Direction = Forward | Backward deriving Show
-  
-type CircularListZipper a = (([a], [a]), ([a], [a]), Maybe Direction)
+data CircularListZipper a = Forward ([a], [a], [a]) | Backward ([a], [a], [a]) deriving Show
 
 createCircularListZipper :: [a] -> CircularListZipper a
-createCircularListZipper [] = error "empty list is passed."
-createCircularListZipper xs = (([], []), (xs, reverse xs), Nothing)
+createCircularListZipper xs = Forward (xs, [], xs)
 
 next :: CircularListZipper a -> (a, CircularListZipper a)
-next (([], []), ([], []), _) = error "empty list"
-next ((xs, ys), ([], []), Just Backward) = next . snd $ next (([], []), (ys, xs), Just Forward)
-next ((xs, ys), ([], []), _) = next (([], []), (ys, xs), Just Forward)
-next ((xs, ys), (f:fs, b:bs), _) = (f, ((f:xs, b:ys), (fs, bs), Just Forward))
+next (Forward  (xs, ys,   []))   = next $ Forward (xs, ys, xs)
+next (Forward  (xs, ys,   z:zs)) = (z, Forward (xs, z:ys, zs))
+next (Backward (xs, [],   z:zs)) = next $ Forward (xs, [z], zs)
+next (Backward (xs, ys,   []))   = next $ Forward (xs, ys, xs)
+next (Backward (xs, y:ys, zs))   = next . snd . next . snd . next $ Forward (xs, ys, y:zs)
 
 prev :: CircularListZipper a -> (a, CircularListZipper a)
-prev (([], []), ([], []), _) = error "empty list"
-prev ((xs, ys), ([], []), Just Forward) = prev . snd $ prev (([], []), (ys, xs), Just Backward)
-prev ((xs, ys), ([], []), _) = prev (([], []), (ys, xs), Just Backward)
-prev ((xs, ys), (f:fs, b:bs), _) = (b, ((f:xs, b:ys), (fs, bs), Just Backward))
+prev (Forward  (xs, [],   zs))   = prev $ Backward (xs, reverse xs, zs)
+prev (Forward  (xs, y:ys, []))   = prev $ Backward (xs, ys, [y])
+prev (Forward  (xs, ys,   z:zs)) = prev . snd . prev . snd . prev $ Backward (xs, z:ys, zs)
+prev (Backward (xs, [],   zs))   = prev $ Backward (xs, reverse xs, zs)
+prev (Backward (xs, y:ys, zs))   = (y, Backward (xs, ys, y:zs))
 
 nextItem :: State (CircularListZipper a) a
 nextItem = state next

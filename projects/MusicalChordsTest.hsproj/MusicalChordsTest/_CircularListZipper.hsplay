@@ -1,4 +1,10 @@
 -- Haskell Playground 1.0
+init [1, 2, 3]
+init [1, 2]
+init [1]
+
+last [1]
+
 createCircularListZipper []
 
 zipper = createCircularListZipper [1, 2, 3]
@@ -16,6 +22,7 @@ prev zipper
 
 (prev . snd) . (next .snd) $ next zipper
 
+(next . snd) . (prev .snd) $ prev zipper
 
 s = do
   nextItem
@@ -35,7 +42,7 @@ s2 = do
   nextItem
   nextItem
   prevItem
-    
+      
 runState s2 $ createCircularListZipper [1, 2, 3]
 
 s3 = do
@@ -56,7 +63,29 @@ s4 = do
     
 runState s4 $ createCircularListZipper [1, 2, 3]
 
-s5 = do
+s6 = do
+  nextItem
+    
+runState s6 $ createCircularListZipper [1, 2, 3]
+
+s7 = do
+  nextItem
+  prevItem
+    
+runState s7 $ createCircularListZipper [1, 2, 3]
+
+s8 = do
+  prevItem
+  
+runState s8 $ createCircularListZipper [1, 2, 3]
+
+s9 = do
+  prevItem
+  nextItem
+    
+runState s9 $ createCircularListZipper [1, 2, 3]
+
+s10 = do
   prevItem
   prevItem
   prevItem
@@ -65,7 +94,7 @@ s5 = do
   prevItem
   nextItem
     
-runState s5 $ createCircularListZipper [1, 2, 3]
+runState s10 $ createCircularListZipper [1, 2, 3]
 
 stat = do
   a <- nextItem
