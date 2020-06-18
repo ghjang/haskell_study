@@ -8,22 +8,22 @@ x-last-ide-version: HfM1.7.0
 executable MusicalChordsTest
     main-is: Main.hs
     other-modules:
-        SimpleMusic.SoundSynthesis
+        Tuple
         SimpleMusic.Chord
-        SimpleMusic.Interval
-        SimpleMusic.Scale
-        SimpleMusic.Note
-        SimpleMusic.ChordWavePlot
         SimpleMusic.Pitch
-        SimpleMusic.SinusoidalSound
+        SimpleMusic.Note
+        SimpleMusic.Interval
         SimpleMusic.DiatonicChord
-        Math.PrimeNumber
+        SimpleMusic.Scale
+        SimpleMusic.SinusoidalSound
+        SimpleMusic.SoundSynthesis
+        SimpleMusic.ChordWavePlot
+        Utility
+        Indexable
+        CircularListZipper
         Math.FunctionPlot
         Math.SinusoidalFunction
-        Indexable
-        Tuple
-        Utility
-        CircularListZipper
+        Math.PrimeNumber
     default-language: Haskell2010
     build-depends:
         mtl -any,

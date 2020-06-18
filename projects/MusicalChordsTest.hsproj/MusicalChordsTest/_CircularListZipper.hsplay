@@ -96,6 +96,16 @@ s10 = do
     
 runState s10 $ createCircularListZipper [1, 2, 3]
 
+s11 = do
+  prevItem
+  prevItem
+  nextItem
+  nextItem
+  nextItem
+  prevItem
+    
+runState s11 $ createCircularListZipper [1, 2, 3]
+
 stat = do
   a <- nextItem
   nextItem
