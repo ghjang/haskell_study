@@ -1,4 +1,8 @@
 -- Haskell Playground 1.0
+0x7B
+
+cMajorScaleDiatonicTriads
+
 fmap show $ Triplet (1, 2, 3)
 
 fmap frequencyOf $ triadChordNote 4 (majorTriad $ natural C) Quater
@@ -24,4 +28,4 @@ plot (Size 1024 768)
                                                   ]
                                 , sceneAnchorPoint = Point 0.5 0.5 }
 
-sceneWithTriadChordPlot $ majorTriad $ natural C
+sceneWithDiatonicTriadChordPlot

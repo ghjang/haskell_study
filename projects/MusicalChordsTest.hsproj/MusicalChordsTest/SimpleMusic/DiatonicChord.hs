@@ -6,6 +6,8 @@ import Control.Applicative
 
 import SimpleMusic.Pitch
 import SimpleMusic.Chord
+import SimpleMusic.Scale
+import Tuple
   
 type Scale = [Pitch]
 

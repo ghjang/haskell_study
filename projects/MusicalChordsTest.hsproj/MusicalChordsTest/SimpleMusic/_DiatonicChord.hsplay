@@ -1,0 +1,4 @@
+-- Haskell Playground 1.0
+majorScaleDiatonicTriad (scale Major $ natural C)
+
+map getTriplet $ majorScaleDiatonicTriad (scale Major $ natural C)
