@@ -9,21 +9,21 @@ executable MusicalChordsTest
     main-is: Main.hs
     other-modules:
         Tuple
-        SimpleMusic.Chord
-        SimpleMusic.Pitch
-        SimpleMusic.Note
-        SimpleMusic.Interval
-        SimpleMusic.DiatonicChord
-        SimpleMusic.Scale
-        SimpleMusic.SinusoidalSound
-        SimpleMusic.SoundSynthesis
-        SimpleMusic.ChordWavePlot
         Utility
-        Indexable
-        CircularListZipper
         Math.FunctionPlot
         Math.SinusoidalFunction
         Math.PrimeNumber
+        CircularListZipper
+        Indexable
+        SimpleMusic.Chord
+        SimpleMusic.Note
+        SimpleMusic.Pitch
+        SimpleMusic.DiatonicChord
+        SimpleMusic.Scale
+        SimpleMusic.Interval
+        SimpleMusic.SinusoidalSound
+        SimpleMusic.ChordWavePlot
+        SimpleMusic.SoundSynthesis
     default-language: Haskell2010
     build-depends:
         mtl -any,
